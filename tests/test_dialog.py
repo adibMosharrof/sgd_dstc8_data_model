@@ -4,7 +4,7 @@ import random
 import glob
 import sys
 
-sys.path.append("./src")
+sys.path.append("./sgd_dstc8_data_model")
 from dstc_dataclasses import DstcDialog
 
 import dstc_utils
@@ -27,4 +27,3 @@ def test_load_dialog():
     dialog_json = dstc_utils.read_json(file)
     dialog = DstcDialog.from_dict(dialog_json[0])
     assert dialog is not None
-    return dialog

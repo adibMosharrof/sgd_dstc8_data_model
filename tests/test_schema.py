@@ -5,7 +5,7 @@ import sys
 
 import yaml
 
-sys.path.append("./src")
+sys.path.append("./sgd_dstc8_data_model")
 
 from dstc_constants import DstcSpecialTokens, DstcConstants
 
