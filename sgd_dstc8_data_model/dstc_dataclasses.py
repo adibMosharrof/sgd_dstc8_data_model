@@ -4,9 +4,9 @@ from pathlib import Path
 from typing import Dict, Optional, List
 
 from dataclasses_json import dataclass_json
-from dstc_constants import DstcSpecialTokens, DstcConstants, DstcSteps, DstcSpeaker
+from sgd_dstc8_data_model.dstc_constants import DstcSpecialTokens, DstcConstants, DstcSteps, DstcSpeaker
 
-import dstc_utils
+from sgd_dstc8_data_model import dstc_utils
 
 
 class DstcObjectAttributeException(Exception):
