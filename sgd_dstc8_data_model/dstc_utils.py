@@ -4,6 +4,9 @@ import yaml
 
 
 def get_dstc_service_name(service_name: str) -> str:
+    i = service_name.find("_")
+    if i == -1:
+        return service_name
     return service_name[: service_name.find("_")]
 
 
