@@ -4,7 +4,12 @@ from pathlib import Path
 from typing import Dict, Optional, List
 
 from dataclasses_json import dataclass_json
-from sgd_dstc8_data_model.dstc_constants import DstcSpecialTokens, DstcConstants, DstcSteps, DstcSpeaker
+from sgd_dstc8_data_model.dstc_constants import (
+    DstcSpecialTokens,
+    DstcConstants,
+    DstcSteps,
+    DstcSpeaker,
+)
 
 from sgd_dstc8_data_model import dstc_utils
 
@@ -209,6 +214,18 @@ class DstcSchema:
     slots: List[DstcSchemaSlot]
     intents: List[DstcSchemaIntent]
     step: Optional[str] = None
+
+    def get_intents(self) -> List[str]:
+        return [i.name for i in self.intents]
+
+    def get_slot_names(self) -> List[str]:
+        return [s.name for s in self.slots]
+
+    def get_possible_values(self, slot_name: str) -> List[str]:
+        out = []
+        for s in self.slots:
+            out.append(s.possible_values)
+        return
 
     def get_slot_repr(self) -> str:
         return "".join(
