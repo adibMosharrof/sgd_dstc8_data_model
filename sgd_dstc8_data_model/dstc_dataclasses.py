@@ -172,6 +172,13 @@ class DstcSchemaIntent:
         self.optional_slots = optional_slots
         self.result_slots = result_slots
 
+    def nlg_repr(self):
+        name = dstc_utils.remove_underscore(self.name)
+        required_slots = ",".join(map(dstc_utils.remove_underscore, self.required_slots))
+        optional_slots = ",".join(map(dstc_utils.remove_underscore, self.optional_slots))
+        result_slots = ",".join(map(dstc_utils.remove_underscore, self.result_slots))
+        return f"{name} \n required slots: {required_slots} \n optional slots: {optional_slots} \n result slots: {result_slots}"
+
     def __str__(self):
         return "".join(
             [
@@ -194,6 +201,11 @@ class DstcSchemaSlot:
 
     def __eq__(self, slot_name: str) -> bool:
         return self.name == slot_name
+
+    def nlg_repr(self) -> str:
+        name = dstc_utils.remove_underscore(self.name)
+        possible_values = ",".join(map(dstc_utils.remove_underscore, self.possible_values))
+        return f"{name} \n possible values: {possible_values}"
 
     def __str__(self):
         return "".join(
@@ -226,6 +238,20 @@ class DstcSchema:
         for s in self.slots:
             out.append(s.possible_values)
         return
+
+    def get_nlg_repr(self) -> str:
+        """
+        Returns a string representation of the schema, used when context type is nlg.
+
+        Returns:
+            str: A string representation of the schema.
+        """
+        return "\n".join([
+            f"Schema for {self.service_name}",
+            self.description,
+            "\n".join([i.nlg_repr() for i in self.intents]),
+            "\n".join([s.nlg_repr() for s in self.slots]),
+        ])
 
     def get_slot_repr(self) -> str:
         return "".join(

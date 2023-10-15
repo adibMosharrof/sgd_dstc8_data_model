@@ -31,3 +31,6 @@ def get_list_of_attrs(class_ref):
         for a in dir(class_ref)
         if not a.startswith("__") and not a.startswith("_") and not callable(getattr(class_ref, a))
     ]
+
+def remove_underscore(item:str):
+    return item.replace("_", " ")
