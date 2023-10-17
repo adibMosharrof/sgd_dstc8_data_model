@@ -202,8 +202,10 @@ class DstcSchemaSlot:
     def __eq__(self, slot_name: str) -> bool:
         return self.name == slot_name
 
-    def nlg_repr(self) -> str:
+    def nlg_repr(self, should_add_possible_values:bool =False) -> str:
         name = dstc_utils.remove_underscore(self.name)
+        if not should_add_possible_values:
+            return name
         possible_values = ",".join(map(dstc_utils.remove_underscore, self.possible_values))
         return f"{name} \n possible values: {possible_values}"
 
@@ -233,7 +235,7 @@ class DstcSchema:
     def get_slot_names(self) -> List[str]:
         return [s.name for s in self.slots]
 
-    def get_possible_values(self, slot_name: str) -> List[str]:
+    def get_possible_values(self, slot_name: str=None) -> List[str]:
         out = []
         for s in self.slots:
             out.append(s.possible_values)
