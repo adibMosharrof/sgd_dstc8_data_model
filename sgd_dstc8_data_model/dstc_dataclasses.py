@@ -177,7 +177,7 @@ class DstcSchemaIntent:
         required_slots = ",".join(map(dstc_utils.remove_underscore, self.required_slots))
         optional_slots = ",".join(map(dstc_utils.remove_underscore, self.optional_slots))
         result_slots = ",".join(map(dstc_utils.remove_underscore, self.result_slots))
-        
+
         # return f"{name} \n required slots: {required_slots} \n optional slots: {optional_slots} \n result slots: {result_slots}"
         return "\n".join([
            f"Intent: {name}",
@@ -259,7 +259,7 @@ class DstcSchema:
             f"Schema for {dstc_utils.extract_characters(self.service_name)}",
             # self.description,
             "\n".join([i.nlg_repr() for i in self.intents]),
-            "\n".join([s.nlg_repr() for s in self.slots]),
+            # "\n".join([s.nlg_repr() for s in self.slots]),
         ])
 
     def get_slot_repr(self) -> str:
