@@ -177,11 +177,12 @@ class DstcSchemaIntent:
         required_slots = ",".join(map(dstc_utils.remove_underscore, self.required_slots))
         optional_slots = ",".join(map(dstc_utils.remove_underscore, self.optional_slots))
         result_slots = ",".join(map(dstc_utils.remove_underscore, self.result_slots))
+        
         # return f"{name} \n required slots: {required_slots} \n optional slots: {optional_slots} \n result slots: {result_slots}"
         return "\n".join([
-           name,
-           f"required slots: {required_slots}",
-           f"optional slots: {optional_slots}", 
+           f"Intent: {name}",
+           f"required slots: {required_slots}" if required_slots else "",
+           f"optional slots: {optional_slots}" if optional_slots else "", 
         ])
 
 
@@ -235,9 +236,6 @@ class DstcSchema:
     intents: List[DstcSchemaIntent]
     step: Optional[str] = None
 
-    def get_nlg_service_name(self) -> str:
-        return "_".split(self.service_name)[0]
-        
     def get_intents(self) -> List[str]:
         return [i.name for i in self.intents]
 
@@ -258,7 +256,7 @@ class DstcSchema:
             str: A string representation of the schema.
         """
         return "\n".join([
-            f"Schema for {self.get_nlg_service_name()}",
+            f"Schema for {dstc_utils.extract_characters(self.service_name)}",
             # self.description,
             "\n".join([i.nlg_repr() for i in self.intents]),
             "\n".join([s.nlg_repr() for s in self.slots]),

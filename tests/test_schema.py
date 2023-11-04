@@ -23,5 +23,6 @@ def test_load_schema():
     schema_json = dstc_utils.read_json(schema)
     assert len(schema_json) > 0
     dstc_schema = DstcSchema.from_dict(schema_json[0])
+    schema_nlg_str = dstc_schema.get_nlg_repr()
     schema_str = dstc_schema.get_full_repr()
     assert schema_str is not None

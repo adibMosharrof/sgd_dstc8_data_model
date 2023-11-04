@@ -34,3 +34,7 @@ def get_list_of_attrs(class_ref):
 
 def remove_underscore(item:str):
     return item.replace("_", " ")
+
+def extract_characters(string):
+  #Using filter to get the characters
+    return "".join(filter(lambda x: x.isalpha(), string))
